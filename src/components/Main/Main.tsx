@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import "./Main.css";
+import { useEffect, useState } from 'react';
+import './Main.css';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { setUsers, addUser, findByName, UserTypes } from '../../store/usersSlice';
 
 async function getUsers() {
     const response = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -7,21 +9,15 @@ async function getUsers() {
     return users;
 }
 
-type userTypes = {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    phone: string;
-}
-
 function Main() {
-    const [usersArray, setUsersArray] = useState([]);
-    const [usersTable, setUsersTable] = useState([]);
+    const users = useAppSelector((state) => state.usersArray.users);
+    const dispatch = useAppDispatch();
+
+    //const [usersArray, setUsersArray] = useState([]);
 
     useEffect(() => {
         getUsers().then(users => {
-            const selectedUsers = users.map((user: userTypes) => {
+            const selectedUsers = users.map((user: UserTypes) => {
                 return {
                     id: user.id,
                     name: user.name,
@@ -30,13 +26,14 @@ function Main() {
                     phone: user.phone
                 };
             });
-            setUsersArray(selectedUsers);
+            dispatch(setUsers(selectedUsers));
+            //setUsersArray(selectedUsers);
         });
     }, []);
 
-    const list = usersArray.map((user: userTypes) => {
+    const list = users.map((user: UserTypes) => {
         return (
-            <div className="table-row">
+            <div className="table-row" key={user.id}>
                 <div className="id">{user.id}</div>
                 <div className="name">{user.name}</div>
                 <div className="username">{user.username}</div>
@@ -46,8 +43,23 @@ function Main() {
         )
     });
 
+    const handlerAddUser = () => {
+        const newUser = {
+            id: 11,
+            name: 'John Bin',
+            username: 'johnbin',
+            email: 'john.bin@gmail.com',
+            phone: '1-200-300-400'
+        };
+        dispatch(addUser(newUser));
+        //dispatch(findByName('find'));
+    }
+
     return (
-        <div className="table">{list}</div>
+        <>
+            <button onClick={handlerAddUser}>Add</button>
+            <div className="table">{list}</div>
+        </>
     )
 }
 
