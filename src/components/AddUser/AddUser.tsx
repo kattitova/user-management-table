@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
-import { addUser, Query, queryKeys, setEditMode, User } from "../../store/usersSlice"
+import { addUser, queryKeys, setEditMode, User } from "../../store/usersSlice"
+import { checkInputs, handleInputChange } from "../../functions";
+import './AddUser.css';
+import { FaCheck } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
 type PropsType = {
     newUserId: number;
@@ -17,20 +21,18 @@ export default function AddUser({ newUserId }: PropsType) {
         phone: ''
     });
 
-    const handleAddUser = () => {
-        dispatch(addUser({ user: newUser, isAdding: false }));
-    }
+    const [errors, setErrors] = useState({
+        name: false,
+        username: false,
+        email: false,
+        phone: false
+    });
 
-    const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-        const { name, value } = e.currentTarget;
-        setNewUser(prevState => ({
-            ...prevState,
-            [name]: value,
-        }));
+    const handleAddUser = () => {
+        if (checkInputs(newUser, setErrors)) dispatch(addUser({ user: newUser, isAdding: false }));
     }
 
     const handleCancel = () => {
-        //end editing
         dispatch(setEditMode(false));
     }
 
@@ -43,16 +45,17 @@ export default function AddUser({ newUserId }: PropsType) {
                             <input
                                 name={key}
                                 value={newUser[key]}
-                                onChange={(e) => handleInputChange(e)}
+                                onChange={(e) => handleInputChange(e, setNewUser)}
                                 placeholder={`Enter ${key}`}
+                                className={errors[key] ? 'error' : ''}
                             />
                         </td>
                     )
                 })
             }
             <td>
-                <button onClick={handleAddUser}>+</button>
-                <button onClick={handleCancel}>x</button>
+                <button className="save-button" onClick={handleAddUser}><FaCheck /></button>
+                <button className="delete-button" onClick={handleCancel}><FaTimes /></button>
             </td>
         </tr>
     )

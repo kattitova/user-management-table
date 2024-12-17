@@ -1,6 +1,40 @@
+main {
+  padding: 20px 25px;
+}
+
+table {
+  width: 100%;
+  color: #404E67;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: left;
+}
+table tr th,
+table tr td {
+  padding: 12px 15px;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+table button {
+  border: none;
+  font-size: 18px;
+  margin-right: 5px;
+}
+table button.edit-button svg {
+  fill: #FFC107;
+}
+table button.save-button svg {
+  fill: #27C46B;
+}
+table button.delete-button svg {
+  fill: #E34724;
+}
+
 .table-header {
-  background-color: #0072C6;
-  color: #fff;
   font-weight: bold;
   text-transform: capitalize;
+}
+
+.table-row:nth-of-type(odd) {
+  background-color: #fcfcfc;
 }/*# sourceMappingURL=UsersTable.css.map */

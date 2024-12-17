@@ -9,7 +9,7 @@ export default function SearchInputs() {
     }
 
     return (
-        <tr>
+        <tr className="inputs-row">
             {
                 queryKeys.map((key) => {
                     return (
@@ -17,6 +17,7 @@ export default function SearchInputs() {
                     )
                 })
             }
+            <td></td>
         </tr>
     )
 }

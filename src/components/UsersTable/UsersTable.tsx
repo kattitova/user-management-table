@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Query, queryKeys, setUsers, User, deleteUser, updateUser } from "../../store/usersSlice";
 import getUsers from "../../api/api";
-import "./UsersTable.css";
 import AddUser from "../AddUser/AddUser";
 import SearchInputs from "../SearchInput/SearchInputs";
+import "./UsersTable.css";
+import { checkInputs, handleInputChange } from "../../functions";
+import { FaPencilAlt } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 
 export default function UsersTable() {
     const { users, searchQueries, isAdding } = useAppSelector((state) => state.usersArray);
@@ -49,17 +53,19 @@ export default function UsersTable() {
         setEditingData({ ...user });
     }
 
-    const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-        const { name, value } = e.currentTarget;
-        setEditingData(prevState => ({
-            ...prevState,
-            [name]: value,
-        }));
-    }
+    const [errors, setErrors] = useState({
+        name: false,
+        username: false,
+        email: false,
+        phone: false
+    });
 
+    //save editind user data
     const handleSaveUser = () => {
-        dispatch(updateUser(editingData as User));
-        setEditingUserId(null);
+        if (checkInputs(editingData as User, setErrors)) {
+            dispatch(updateUser(editingData as User));
+            setEditingUserId(null);
+        }
     }
 
     //create users list for rendering
@@ -75,8 +81,9 @@ export default function UsersTable() {
                                     (<input
                                         name={key}
                                         value={editingData[key]}
-                                        onChange={(e) => handleInputChange(e)}
+                                        onChange={(e) => handleInputChange(e, setEditingData)}
                                         placeholder={`Enter ${key}`}
+                                        className={errors[key] ? 'error' : ''}
                                     />)
                                     :
                                     (user[key])
@@ -89,11 +96,11 @@ export default function UsersTable() {
                 <td>
                     {editingUserId === user.id
                         ?
-                        (<button name={`${user.id}`} onClick={() => handleSaveUser()}>Save</button>)
+                        (<button className="save-button" name={`${user.id}`} onClick={() => handleSaveUser()}><FaCheck /></button>)
                         :
-                        (<button name={`${user.id}`} onClick={(e) => handleEditUser(user)}>Edit</button>)
+                        (<button className="edit-button" name={`${user.id}`} onClick={(e) => handleEditUser(user)}><FaPencilAlt /></button>)
                     }
-                    <button name={`${user.id}`} onClick={(e) => handleDeleteUser(e)}>Delete</button>
+                    <button className="delete-button" name={`${user.id}`} onClick={(e) => handleDeleteUser(e)}><FaTrash /></button>
                 </td>
             </tr>
         )
@@ -106,10 +113,11 @@ export default function UsersTable() {
                     {
                         queryKeys.map((key) => {
                             return (
-                                <td key={key}>{key}</td>
+                                <th key={key}>{key}</th>
                             )
                         })
                     }
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
