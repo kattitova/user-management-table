@@ -1,27 +1,22 @@
-import './Main.css';
-
+import { useState } from 'react';
 import SearchInputs from '../SearchInput/SearchInputs';
 import UsersTable from '../UsersTable/UsersTable';
+import './Main.css';
+import { useAppDispatch } from '../../store/hooks';
+import { setEditMode } from '../../store/usersSlice';
 
 function Main() {
-
+    const dispatch = useAppDispatch();
 
     const handlerAddUser = () => {
-        const newUser = {
-            id: 11,
-            name: 'John Bin',
-            username: 'johnbin',
-            email: 'john.bin@gmail.com',
-            phone: '1-200-300-400'
-        };
-        //dispatch(addUser(newUser));
+        dispatch(setEditMode(true));
     }
 
     return (
         <>
-            <SearchInputs />
+            <h1>User Details</h1>
+            <button onClick={handlerAddUser}>+ Add New</button>
 
-            <button onClick={handlerAddUser}>Add</button>
             <UsersTable />
 
         </>

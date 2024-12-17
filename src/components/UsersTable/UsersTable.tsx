@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Query, queryKeys, setUsers, User, deleteUser } from "../../store/usersSlice";
+import { Query, queryKeys, setUsers, User, deleteUser, updateUser } from "../../store/usersSlice";
 import getUsers from "../../api/api";
+import "./UsersTable.css";
+import AddUser from "../AddUser/AddUser";
+import SearchInputs from "../SearchInput/SearchInputs";
 
 export default function UsersTable() {
-    const { users, searchQueries } = useAppSelector((state) => state.usersArray);
+    const { users, searchQueries, isAdding } = useAppSelector((state) => state.usersArray);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -28,8 +31,35 @@ export default function UsersTable() {
         return true;
     });
 
+    const [newUserId, setNewUserId] = useState<number>(0);
+    useEffect(() => {
+        if (filteredUsers.length > 0)
+            setNewUserId(filteredUsers[filteredUsers.length - 1].id + 1);
+    }, [filteredUsers]);
+
     const handleDeleteUser = (e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(deleteUser(e.currentTarget.id));
+        dispatch(deleteUser(Number(e.currentTarget.name)));
+    }
+
+    const [editingUserId, setEditingUserId] = useState<number | null>();
+    const [editingData, setEditingData] = useState<Partial<User>>({});
+
+    const handleEditUser = (user: User) => {
+        setEditingUserId(user.id);
+        setEditingData({ ...user });
+    }
+
+    const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const { name, value } = e.currentTarget;
+        setEditingData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    }
+
+    const handleSaveUser = () => {
+        dispatch(updateUser(editingData as User));
+        setEditingUserId(null);
     }
 
     //create users list for rendering
@@ -39,18 +69,39 @@ export default function UsersTable() {
                 {
                     queryKeys.map((key) => {
                         return (
-                            <td key={key} className={key}>{user[key]}</td>
+                            <td key={key} className={key}>
+                                {editingUserId === user.id
+                                    ?
+                                    (<input
+                                        name={key}
+                                        value={editingData[key]}
+                                        onChange={(e) => handleInputChange(e)}
+                                        placeholder={`Enter ${key}`}
+                                    />)
+                                    :
+                                    (user[key])
+                                }
+
+                            </td>
                         )
                     })
                 }
-                <td><button id={user.username} onClick={(e) => handleDeleteUser(e)}>Delete</button></td>
+                <td>
+                    {editingUserId === user.id
+                        ?
+                        (<button name={`${user.id}`} onClick={() => handleSaveUser()}>Save</button>)
+                        :
+                        (<button name={`${user.id}`} onClick={(e) => handleEditUser(user)}>Edit</button>)
+                    }
+                    <button name={`${user.id}`} onClick={(e) => handleDeleteUser(e)}>Delete</button>
+                </td>
             </tr>
         )
     });
 
     return (
         <table>
-            <thead>
+            <thead className="table-header">
                 <tr>
                     {
                         queryKeys.map((key) => {
@@ -62,7 +113,9 @@ export default function UsersTable() {
                 </tr>
             </thead>
             <tbody>
+                <SearchInputs />
                 {list}
+                {isAdding && (<AddUser newUserId={newUserId} />)}
             </tbody>
         </table>
     )

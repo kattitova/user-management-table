@@ -9,14 +9,14 @@ export default function SearchInputs() {
     }
 
     return (
-        <>
+        <tr>
             {
                 queryKeys.map((key) => {
                     return (
-                        <input id={key} key={key} placeholder={`Search by ${key}`} onChange={(e) => { handleSearchInput(e) }} />
+                        <td><input id={key} key={key} placeholder={`Search by ${key}`} onChange={(e) => { handleSearchInput(e) }} /></td>
                     )
                 })
             }
-        </>
+        </tr>
     )
 }
