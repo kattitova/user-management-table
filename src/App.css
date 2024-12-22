@@ -1,8 +1,9 @@
 .App {
-  min-width: 1000px;
+  width: 100%;
   background: #fff;
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  max-width: 1000px;
 }
 
 footer {
@@ -12,4 +13,5 @@ footer {
   padding: 5px;
   color: rgb(170, 170, 170);
   font-size: 0.8rem;
+  text-align: center;
 }

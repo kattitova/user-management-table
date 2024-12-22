@@ -1,5 +1,7 @@
 import { useAppDispatch } from "../../store/hooks";
 import { Query, searchUser, queryKeys } from "../../store/usersSlice";
+import { FaSearch } from "react-icons/fa";
+import "./SearchInputs.css";
 
 export default function SearchInputs() {
     const dispatch = useAppDispatch();
@@ -9,11 +11,14 @@ export default function SearchInputs() {
     }
 
     return (
-        <tr className="inputs-row">
+        <tr className="search-row">
             {
                 queryKeys.map((key) => {
                     return (
-                        <td><input id={key} key={key} placeholder={`Search by ${key}`} onChange={(e) => { handleSearchInput(e) }} /></td>
+                        <td key={`search-${key}`}>
+                            <FaSearch />
+                            <input id={key} placeholder={`Search by ${key}`} onChange={(e) => { handleSearchInput(e) }} />
+                        </td>
                     )
                 })
             }

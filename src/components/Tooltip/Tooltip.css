@@ -1,0 +1,21 @@
+.tooltip {
+  position: absolute;
+  background-color: #384153;
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 3px;
+  padding: 5px 10px;
+  top: -33px;
+  left: -50%;
+  visibility: hidden;
+}
+.tooltip::before {
+  content: "";
+  background-color: #384153;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  bottom: -5px;
+  transform: rotate(45deg);
+  left: 40%;
+}/*# sourceMappingURL=Tooltip.css.map */

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans");
+
 * {
   box-sizing: border-box;
   font-family: "Nunito Sans", sans-serif;
@@ -35,11 +36,12 @@ button:hover {
 a {
   text-decoration: none;
   color: inherit;
-}
-a:hover {
-  cursor: pointer;
-  font-weight: 600;
-  color: #0072C6;
+
+  &:hover {
+    cursor: pointer;
+    font-weight: 600;
+    color: #0072C6;
+  }
 }
 
 #root {
@@ -53,4 +55,4 @@ a:hover {
   html {
     font-size: 14px;
   }
-}/*# sourceMappingURL=index.css.map */
+}
