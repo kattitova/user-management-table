@@ -1,9 +1,10 @@
 import { FaCheck, FaPencilAlt, FaTrash } from "react-icons/fa";
-import useUsers from "../../features/Users/useUsers";
-import { handleInputChange } from "../../features/Users/inputHandles";
+import useEditUsers from "../../features/Users/useEditUsers";
+import { handleInputChange } from "../../features/Users/handleInputChange";
 import { queryKeys, User } from "../../store/usersSlice";
 import useFilterUsers from "../../features/Users/useFilterUsers";
 import Tooltip from "../Tooltip/Tooltip";
+import useDeleteUser from "../../features/Users/useDeleteUser";
 
 export default function UsersList() {
     const {
@@ -11,12 +12,12 @@ export default function UsersList() {
         editingData,
         setEditingData,
         errors,
-        handleDeleteUser,
         handleSaveUser,
         handleEditUser,
-    } = useUsers();
+    } = useEditUsers();
 
     const { filteredUsers } = useFilterUsers();
+    const { handleDeleteUser } = useDeleteUser();
 
     return (
         <>

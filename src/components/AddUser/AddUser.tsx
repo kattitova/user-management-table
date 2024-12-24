@@ -1,13 +1,15 @@
 import { queryKeys } from "../../store/usersSlice"
-import { handleInputChange } from "../../features/Users/inputHandles";
+import { handleInputChange } from "../../features/Users/handleInputChange";
 import { FaCheck } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
-import useUsers from "../../features/Users/useUsers";
-import './AddUser.css';
 import Tooltip from "../Tooltip/Tooltip";
+import useCancelUser from "../../features/Users/useCancelUser";
+import useAddUser from "../../features/Users/useAddUser";
+import './AddUser.css';
 
 export default function AddUser() {
-    const { errors, newUserId, newUser, setNewUser, handleAddUser, handleCancel } = useUsers();
+    const { errors, newUserId, newUser, setNewUser, handleAddUser } = useAddUser();
+    const { handleCancel } = useCancelUser();
 
     return (
         <tr className="table-row" key={newUserId}>
