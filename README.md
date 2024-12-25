@@ -1,46 +1,20 @@
-# Getting Started with Create React App
+# Test task for Smart-business Company
+## JUNIOR FRONTEND DEVELOPER ASSIGNMENT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The goal of this task is to evaluate my skills in creating a React application using Redux Toolkit and TypeScript. 
+I developed a user management table that displays user information fetched from a mock API, along with implementing local filter functionality, adding new users, editing user information, and deleting users.
 
-## Available Scripts
+# Implemented features:
+1. Fetched All Users from JSONPlaceholder endpoint GET /users.
+2. Displayed Users in a table with columns: name, username, email, and phone.
+3. Implemented Advanced Filtering:
+• Added search input fields for each column (name, username, email, phone).
+• The table dynamically filters results based on user input in these fields, with real-time updates.
+4. Implemented adding a new user to the table end with validation empty inputs value.
+5. Implemented editing user information functionality with validation empty inputs value.
+6. Implemented deleting users from the table.
+7. State Management. Used Redux Toolkit to manage the application state, including user data, adding, editing, deleting, and filter states.
+8. Used TypeScript across the entire web application to ensure proper typing and reduce potential runtime errors.
+9. Design and Styling. Applied custom minimalistic styles using SCSS to ensure a user-friendly and visually appealing interface.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Project demo [LINK](https://kattitova.github.io/user-management-table)
