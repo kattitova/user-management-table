@@ -1,8 +1,8 @@
 # Test task for Smart-business Company
 ## JUNIOR FRONTEND DEVELOPER ASSIGNMENT
 
-The goal of this task is to evaluate my skills in creating a React application using Redux Toolkit and TypeScript.\ 
-I developed a user management table that displays user information fetched from a mock API, along with implementing local filter functionality, adding new users, editing user information, and deleting users.
+The goal of this task is to evaluate my skills in creating a React application using Redux Toolkit and TypeScript.\
+Developed a user management table that displays user information fetched from a mock API, along with implementing local filter functionality, adding new users, editing user information, and deleting users.
 
 ## Implemented features:
 1. Fetched All Users from JSONPlaceholder endpoint GET /users.
