@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/user-management-table/static/css/main.60be898a.css",
+    "main.js": "/user-management-table/static/js/main.f5682487.js",
+    "index.html": "/user-management-table/index.html",
+    "main.60be898a.css.map": "/user-management-table/static/css/main.60be898a.css.map",
+    "main.f5682487.js.map": "/user-management-table/static/js/main.f5682487.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.60be898a.css",
+    "static/js/main.f5682487.js"
+  ]
+}
